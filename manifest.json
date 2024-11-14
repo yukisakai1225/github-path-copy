@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "GitHub Path Copy",
+  "version": "1.0",
+  "description": "A Chrome extension to copy GitHub file paths easily.",
+  "permissions": ["activeTab", "clipboardWrite"],
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/*"],
+      "js": ["copy-path.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["button.html"],
+      "matches": ["https://github.com/*"]
+    }
+  ]
+}
