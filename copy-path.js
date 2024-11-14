@@ -1,18 +1,15 @@
-addFeaturesAttempt();
+let currentUrl = location.href;
 
-function addFeaturesAttempt() {
-  stopPropagationOfCopyButtons();
-  if (!addCopyButtons()) setTimeout(addFeaturesAttempt, 500); // retry after 500 millisecconds
-}
-
-function stopPropagationOfCopyButtons() {
-  const buttons = document.querySelectorAll(".copy-path-button");
-  buttons.forEach((button) => {
-    button.addEventListener("click", (event) => {
-      event.stopPropagation();
-    });
-  });
-}
+// SPAだと画面遷移してもcontent scriptが読み込まれないのでURLの変化を監視する
+const checkUrlChange = () => {
+  if (currentUrl !== location.href) {
+    currentUrl = location.href;
+    // URLが変わったのでボタンを追加
+    addCopyButtons();
+  }
+};
+setInterval(checkUrlChange, 1000); // 1秒ごとにチェック
+addCopyButtons();
 
 async function addCopyButtons() {
   const buttonHtml = await fetch(chrome.runtime.getURL("button.html")).then(
@@ -37,7 +34,10 @@ async function addCopyButtons() {
       `#${parentId} > details > summary > div > span > a`
     ).textContent;
     const b = createCopyButton(buttonHtml, path);
-    section.appendChild(b);
+
+    if (section.lastChild.tagName !== "BUTTON") {
+      section.appendChild(b);
+    }
   }
   return true;
 }
