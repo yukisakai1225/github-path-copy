@@ -52,3 +52,11 @@ function createCopyButton(buttonHtml, path) {
 
   return element;
 }
+
+function parsePath(path) {
+  // ...から始まる場合、...から最初の/まで削除
+  if (path.startsWith("...")) {
+    return path.substring(path.indexOf("/") + 1);
+  }
+  return path;
+}
