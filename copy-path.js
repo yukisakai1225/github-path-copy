@@ -12,7 +12,7 @@ setInterval(checkUrlChange, 1000); // 1秒ごとにチェック
 addCopyButtons();
 
 async function addCopyButtons() {
-  const buttonHtml = await fetch(chrome.runtime.getURL("button.html")).then(
+  const buttonHtml = await fetch(chrome.runtime.getURL("./button.html")).then(
     (response) => response.text()
   );
 
