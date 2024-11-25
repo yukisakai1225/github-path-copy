@@ -33,7 +33,8 @@ async function addCopyButtons() {
     const path = document.querySelector(
       `#${parentId} > details > summary > div > span > a`
     ).textContent;
-    const b = createCopyButton(buttonHtml, path);
+    const parsedPath = parsePath(path);
+    const b = createCopyButton(buttonHtml, parsedPath);
 
     if (section.lastChild.tagName !== "BUTTON") {
       section.appendChild(b);
