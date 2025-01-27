@@ -28,10 +28,10 @@ async function addCopyButtons() {
   for (let i = 0; i < result.snapshotLength; i++) {
     const parentId = result.snapshotItem(i).id;
     const section = document.querySelector(
-      `#${parentId} > details > summary > div > span`
+      `#${parentId} > details-collapsible > details > summary > div > span`
     );
     const path = document.querySelector(
-      `#${parentId} > details > summary > div > span > a`
+      `#${parentId} > details-collapsible > details > summary > div > span > a`
     ).textContent;
     const parsedPath = parsePath(path);
     const b = createCopyButton(buttonHtml, parsedPath);
